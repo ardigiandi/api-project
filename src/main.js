@@ -5,22 +5,23 @@ import cookieParser from 'cookie-parser'
 import connectionDB from "./config/db.js";
 import router from "./routes/index.js";
 
-
 const app = express();
 
-const PORT = process.env.PORT || 3000;
-
+// Middleware
 app.use(cors({
   origin: process.env.CLIENT_URL,
   credentials: true
-}))
+}));
 
-app.use(express.json())
-app.use(cookieParser())
+app.use(express.json());
+app.use(cookieParser());
 
-app.use('/api', router)
+// Routes
+app.use('/api', router);
 
-app.listen(PORT, () => {
-  connectionDB()
-  console.log(`server is running on ${PORT}`);
-});
+// ✅ Jalankan koneksi DB sekali (saat modul di-load)
+connectionDB();
+
+// ❌ Jangan pakai app.listen()
+// ✅ Export app untuk Vercel
+export default app;
