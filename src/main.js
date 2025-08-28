@@ -10,7 +10,9 @@ const app = express();
 // Middleware
 app.use(cors({
   origin: process.env.CLIENT_URL,
-  credentials: true
+  credentials: true,
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // tambahin OPTIONS biar preflight lolos
+  allowedHeaders: ["Content-Type", "Authorization"], // tambahin biar axios/fe jalan
 }));
 
 app.use(express.json());
