@@ -7,6 +7,8 @@ import router from "./routes/index.js";
 
 const app = express();
 
+// const PORT = process.env.PORT || 3000;
+
 // Middleware
 app.use(cors({
   origin: process.env.CLIENT_URL,
@@ -26,4 +28,9 @@ connectionDB();
 
 // ❌ Jangan pakai app.listen()
 // ✅ Export app untuk Vercel
+
+// app.listen(PORT, () => {
+//   connectionDB()
+//   console.log(`server is running on ${PORT}`);
+// });
 export default app;
