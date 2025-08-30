@@ -102,6 +102,7 @@ export const login = async (req, res) => {
     return res.status(200).json({
       message: "Login succesfully",
       user,
+      token,
     });
   } catch (error) {
     console.log(error);
@@ -125,17 +126,17 @@ export const whoami = async (req, res) => {
   }
 };
 
-
 export const logout = async (req, res) => {
   try {
-    res.clearCookie("token")
+    res.clearCookie("token");
     return res.status(200).json({
-      message: "Logout succesfully, please wait you are being redirected to login page"
-    })
+      message:
+        "Logout succesfully, please wait you are being redirected to login page",
+    });
   } catch (error) {
-    console.log(error)
+    console.log(error);
     return res.status(500).json({
-      message: "Internal server error"
-    })
+      message: "Internal server error",
+    });
   }
-}
+};
