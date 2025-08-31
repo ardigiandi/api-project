@@ -7,14 +7,14 @@ import router from "./routes/index.js";
 
 const app = express();
 
-const PORT = process.env.PORT || 3000
+// const PORT = process.env.PORT || 3000
 
 // Middleware
 app.use(cors({
   origin: process.env.CLIENT_URL,
   credentials: true,
-  // methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // tambahin OPTIONS biar preflight lolos
-  // allowedHeaders: ["Content-Type", "Authorization"], // tambahin biar axios/fe jalan
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // tambahin OPTIONS biar preflight lolos
+  allowedHeaders: ["Content-Type", "Authorization"], // tambahin biar axios/fe jalan
 }));
 
 app.use(express.json());
@@ -24,13 +24,13 @@ app.use(cookieParser());
 app.use('/api', router);
 
 // ✅ Jalankan koneksi DB sekali (saat modul di-load)
-// connectionDB();
+connectionDB();
 
 // ❌ Jangan pakai app.listen()
 // ✅ Export app untuk Vercel
 
-app.listen(PORT, () => {
-  connectionDB()
-  console.log(`server is running on ${PORT}`);
-});
-// export default app;
+// app.listen(PORT, () => {
+//   connectionDB()
+//   console.log(`server is running on ${PORT}`);
+// });
+export default app;
